@@ -92,12 +92,12 @@ srcX2 = magpy.current.Line(
 )
 
 srcY1 = magpy.current.Line(
-    current=currentY + diffY,
+    current=currentY + diffY/2,
     vertices=((-240, -240, 110), (240, -240, 110), (240, -240, -110), (-240, -240, -110), (-240, -240, 110)),
 )
 
 srcY2 = magpy.current.Line(
-    current=currentY - diffY,
+    current=currentY - diffY/2,
     vertices=((-240, 240, 110), (240, 240, 110), (240, 240, -110), (-240, 240, -110), (-240, 240, 110)),
 )
 
