@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import Normalize
 import matplotlib.cm as cm
 
-currentZ = 11.7
-currentX = -6.8
-currentY = 6.8
+currentZ, diffZ = 11.7, 0
+currentX, diffX = -6.8, 0
+currentY, diffY = 6.8, 0
 currentC = 1000
 geoNorth = 20140*1e-6
 geoEast = 103*1e-6
@@ -72,32 +72,32 @@ class displayB:
         plt.show()
 
 srcZ1 = magpy.current.Line(
-    current=currentZ,
+    current=currentZ + diffZ/2,
     vertices=((-240, -240, 110), (240, -240, 110), (240, 240, 110), (-240, 240, 110), (-240, -240, 110)),
 )
 
 srcZ2 = magpy.current.Line(
-    current=currentZ,
+    current=currentZ - diffZ/2,
     vertices=((-240, -240, -110), (240, -240, -110), (240, 240, -110), (-240, 240, -110), (-240, -240, -110)),
 )
 
 srcX1 = magpy.current.Line(
-    current=currentX,
+    current=currentX + diffX/2,
     vertices=((-240, -240, 110), (-240, -240, -110), (-240, 240, -110), (-240, 240, 110), (-240, -240, 110)),
 )
 
 srcX2 = magpy.current.Line(
-    current=currentX,
+    current=currentX - diffX/2,
     vertices=((240, -240, 110), (240, -240, -110), (240, 240, -110), (240, 240, 110), (240, -240, 110)),
 )
 
 srcY1 = magpy.current.Line(
-    current=currentY,
+    current=currentY + diffY,
     vertices=((-240, -240, 110), (240, -240, 110), (240, -240, -110), (-240, -240, -110), (-240, -240, 110)),
 )
 
 srcY2 = magpy.current.Line(
-    current=currentY,
+    current=currentY - diffY,
     vertices=((-240, 240, 110), (240, 240, 110), (240, 240, -110), (-240, 240, -110), (-240, 240, 110)),
 )
 
