@@ -15,7 +15,10 @@ geoNorth = 20140 * 1e-6
 geoEast = 103 * 1e-6
 geoDown = 43325 * 1e-6
 BEarth = np.array([0.707107 * (geoNorth - geoEast), -0.707107 * (geoNorth + geoEast), -geoDown])
-scaling = 20
+scaling = 20  # for visual effect in 3d
+simuSize = 100 # how big is simulation volume
+viewSize = 100 # how big is 3d view volume doesn't have to be equal to simuSize but recommended
+sidePoints = 21j # how many points on each side of the simulation volume in imaginary (j is necessary)
 
 
 # mind that when the person is standing in front of the experiment and facing free space experiment, x is to
@@ -36,7 +39,7 @@ class displayB:
         self.totalB = totalB
         self.grid = grid
 
-    def show3dRegular(self):
+    def show3dRegular(self, viewSize):
         strength = np.sum(self.totalB ** 2, axis=0)
         strength = np.sqrt(strength)
         norm = Normalize()
@@ -63,9 +66,9 @@ class displayB:
         cbar = fig.colorbar(sm, ax=ax, label='Strength')
 
         # Set plot limits
-        ax.set_xlim([-100, 100])
-        ax.set_ylim([-100, 100])
-        ax.set_zlim([-100, 100])
+        ax.set_xlim([-viewSize, viewSize])
+        ax.set_ylim([-viewSize, viewSize])
+        ax.set_zlim([-viewSize, viewSize])
 
         ax.set_xlabel('X-axis')
         ax.set_ylabel('Y-axis')
@@ -266,7 +269,7 @@ srcC2 = magpy.current.Line(
     vertices=((-75, 80, 50), (75, 80, 50), (75, 80, -50), (-75, 80, -50), (-75, 80, 50)),
 )
 
-grid = np.mgrid[-100:100:21j, -100:100:21j, -100:100:21j].transpose((1, 2, 3, 0))
+grid = np.mgrid[-simuSize:simuSize:sidePoints, -simuSize:simuSize:sidePoints, -simuSize:simuSize:sidePoints].transpose((1, 2, 3, 0))
 
 Z1 = fieldOneCom(srcZ1, grid)
 Z2 = fieldOneCom(srcZ2, grid)
